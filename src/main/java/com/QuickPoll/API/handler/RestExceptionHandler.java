@@ -25,10 +25,8 @@ import java.util.List;
 
 @ControllerAdvice
     public class RestExceptionHandler extends ResponseEntityExceptionHandler {
-
     @Autowired
     private MessageSource messageSource;
-
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException rnfe, HttpServletRequest request) {
         ErrorDetail errorDetail = new ErrorDetail();
@@ -67,7 +65,7 @@ import java.util.List;
     }
 
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(
+    public ResponseEntity<Object> handleHttpMessageNotReadable(
             HttpMessageNotReadableException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
         ErrorDetail errorDetail = new ErrorDetail();

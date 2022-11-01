@@ -23,7 +23,7 @@ public class PollService {
     @Autowired
     private PollRepository pollRepository;
 
-    protected void verifyPoll(Long pollId) throws ResourceNotFoundException {
+    public void verifyPoll(Long pollId) throws ResourceNotFoundException {
         Poll poll = pollRepository.findById(pollId).orElse(null);
         if (poll == null) {
             throw new ResourceNotFoundException("Poll with id " + pollId + " not found");
@@ -56,11 +56,9 @@ public class PollService {
     }
 
 
-    public ResponseEntity<?> updatePoll(Poll poll, Long pollId) {
-
+    public void updatePoll(Long pollId, Poll poll) {
         verifyPoll(pollId);
         pollRepository.save(poll);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

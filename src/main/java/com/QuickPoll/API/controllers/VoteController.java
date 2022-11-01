@@ -43,7 +43,7 @@ public class VoteController {
         return voteRepository.findAll();
     }
 
-    @RequestMapping(value="/polls{pollId}/votes", method=RequestMethod.GET)
+    @RequestMapping(value="/polls/{pollId}/votes", method=RequestMethod.GET)
     public Optional<Vote> getAllVote(@PathVariable Long pollId) {
         return voteRepository.findById(pollId);
     }

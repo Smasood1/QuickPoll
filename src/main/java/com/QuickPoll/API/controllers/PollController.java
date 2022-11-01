@@ -33,18 +33,21 @@ import java.util.Optional;
 
         @GetMapping("/polls/{pollId}")
         public ResponseEntity<?> getPoll(@PathVariable Long pollId) {
+            pollService.verifyPoll(pollId);
             return pollService.getPoll(pollId);
         }
 
         @PutMapping("/polls/{pollId}")
-        public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable Long pollID) {
+        public ResponseEntity<?> updatePoll(@PathVariable Long pollId,@RequestBody Poll poll) {
 
-            return pollService.updatePoll(poll, pollID);
+             pollService.verifyPoll(pollId);
+             pollService.updatePoll(pollId,poll);
+             return new ResponseEntity<>(HttpStatus.OK);
         }
 
-        @DeleteMapping("/polls/{pollID}")
+        @DeleteMapping("/polls/{pollId}")
         public ResponseEntity<?> deletePoll(@PathVariable Long pollId) {
-
+            pollService.verifyPoll(pollId);
             return pollService.deletePoll(pollId);
         }
     }
